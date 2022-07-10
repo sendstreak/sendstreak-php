@@ -1,0 +1,19 @@
+{
+    "name": "tinkermail/tinkermail-php",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Tinkermail\\TinkermailPhp\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "dbettenbuk",
+            "email": "fade@hotmail.hu"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "7.0",
+        "psr/log": "~1.0"
+    }
+}
