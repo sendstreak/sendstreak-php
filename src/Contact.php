@@ -1,11 +1,11 @@
 <?php
 
-namespace Tinkermail\TinkermailPhp;
+namespace SendStreak\SendStreakPhp;
 
 use JsonSerializable;
 
 /**
- * Represents a Contact in Tinkermail.
+ * Represents a Contact in SendStreak.
  */
 class Contact implements JsonSerializable
 {

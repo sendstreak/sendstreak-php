@@ -1,15 +1,15 @@
 {
-    "name": "tinkermail/tinkermail-php",
+    "name": "sendstreak/sendstreak-php",
     "type": "library",
     "autoload": {
         "psr-4": {
-            "Tinkermail\\TinkermailPhp\\": "src/"
+            "SendStreak\\SendStreakPhp\\": "src/"
         }
     },
     "authors": [
         {
-            "name": "tinkermail.io",
-            "email": "info@tinkermail.io"
+            "name": "sendstreak.com",
+            "email": "admin@sendstreak.com"
         }
     ],
     "require": {

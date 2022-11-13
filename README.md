@@ -1,19 +1,19 @@
-# Tinkermail PHP SDK
+# SendStreak PHP SDK
 
-[Tinkermail](https://www.tinkermail.io) is a simple interface that lets you integrate quickly to Amazon SES, Gmail or any other SMTP server to send your transactional emails easily and pretty much for FREE.
+[SendStreak](https://www.sendstreak.com) is a simple interface that lets you integrate quickly with email services such as Mailchimp, Sendgrid or even AWS SES or Gmail to decouple your audience, email history and templates from your email provider.
 
 ## Installation
 
 ```sh
-$ composer require tinkermail/tinkermail-php
+$ composer require sendstreak/sendstreak-php
 ```
 
 ## Usage
 
 ```php
-$client = new Tinkermail\TinkermailPhp\TinkermailClient("YOUR_API_KEY");
+$client = new SendStreak\SendStreakPhp\SendStreakClient("YOUR_API_KEY");
 
-$contact = new Tinkermail\TinkermailPhp\Contact(
+$contact = new SendStreak\SendStreakPhp\Contact(
     "johndoe@example.com", 
     [
         'firstName' => 'John',
@@ -21,7 +21,7 @@ $contact = new Tinkermail\TinkermailPhp\Contact(
         'onboarded' => false
     ]
 );
-// Push your contacts to tinkermail with as many attributes as you want
+// Push your contacts to SendStreak with as many attributes as you want
 $client->updateContact($contact);
 
 // Send them emails using predefined templates
@@ -47,4 +47,8 @@ $client->sendMailAsync(
 
 ## We accept contributions here
 
-If you're a PHP developer using Tinkermail and want to contribute to this SDK, we're more than happy to have your pull request here - and your name on the hall of fame forever!
+If you're a PHP developer using SendStreak and want to contribute to this SDK, we're more than happy to have your pull request here - and your name on the hall of fame forever!
+
+## Hall of fame
+
+13.07.2023 [Daniel Martin Bettenbuk](https://github.com/FractalXX) - Initial version of SendStreak PHP SDK

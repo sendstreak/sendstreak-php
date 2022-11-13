@@ -1,5 +1,5 @@
 <?php
-namespace Tinkermail\TinkermailPhp;
+namespace SendStreak\SendStreakPhp;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
@@ -9,9 +9,9 @@ use Psr\Log\NullLogger;
 use Psr\Log\LoggerInterface;
 
 /**
- * API Client to make requests to Tinkermail.
+ * API Client to make requests to SendStreak.
  */
-class TinkermailClient {
+class SendStreakClient {
 
     private const RESPONSE_STATUS_UNAUTHORIZED = 401;
 
@@ -38,7 +38,7 @@ class TinkermailClient {
     public function __construct(string $apiKey, LoggerInterface $logger = null, array $options = [])
     {
         if (!$apiKey) {
-            throw new \Exception("An API key is required to initialize the tinkermail SDK.");
+            throw new \Exception("An API key is required to initialize the SendStreak SDK.");
         }
 
         $this->apiKey = $apiKey;
@@ -96,7 +96,7 @@ class TinkermailClient {
      */
     public function sendMail(string $recipientAddress, string $templateSlug, array $variables = []): void
     {
-        $this->invokeTinkermailApi("/v1/messages", $this->createMailPayload($recipientAddress, $templateSlug, $variables));
+        $this->invokeSendStreakApi("/v1/messages", $this->createMailPayload($recipientAddress, $templateSlug, $variables));
     }
 
     /**
@@ -108,7 +108,7 @@ class TinkermailClient {
      */
     public function sendMailAsync(string $recipientAddress, string $templateSlug, array $variables = []): PromiseInterface
     {
-        return $this->invokeTinkermailApiAsync("/v1/messages", $this->createMailPayload($recipientAddress, $templateSlug, $variables));
+        return $this->invokeSendStreakApiAsync("/v1/messages", $this->createMailPayload($recipientAddress, $templateSlug, $variables));
     }
 
     /**
@@ -118,7 +118,7 @@ class TinkermailClient {
      */
     public function updateContact(Contact $contact): void
     {
-        $this->invokeTinkermailApi("/v1/contacts", $contact->jsonSerialize());
+        $this->invokeSendStreakApi("/v1/contacts", $contact->jsonSerialize());
     }
 
     /**
@@ -128,28 +128,28 @@ class TinkermailClient {
      */
     public function updateContactAsync(Contact $contact): PromiseInterface
     {
-        return $this->invokeTinkermailApiAsync("/v1/contacts", $contact->jsonSerialize());
+        return $this->invokeSendStreakApiAsync("/v1/contacts", $contact->jsonSerialize());
     }
 
-    private function invokeTinkermailApi(string $path, array $body): void
+    private function invokeSendStreakApi(string $path, array $body): void
     {
         try {
             $this->guzzleClient->request('POST', $path, $this->createClientOptions($body));
         } catch (BadResponseException $exception) {
             $this->handleBadResponse($exception);
         } catch (\Throwable $exception) {
-            $this->logger->error("Error invoking the tinkermail API. Error message: {$exception->getMessage()}");
+            $this->logger->error("Error invoking the SendStreak API. Error message: {$exception->getMessage()}");
         }
     }
 
-    private function invokeTinkermailApiAsync(string $path, array $body): PromiseInterface
+    private function invokeSendStreakApiAsync(string $path, array $body): PromiseInterface
     {
         return $this->guzzleClient->requestAsync('POST', $path, $this->createClientOptions($body))
             ->otherwise(function ($error) {
                 if ($error instanceof BadResponseException) {
                     $this->handleBadResponse($error);
                 } else {
-                    $this->logger->error("Error invoking the tinkermail API. Error message: {$error->getMessage()}");
+                    $this->logger->error("Error invoking the SendStreak API. Error message: {$error->getMessage()}");
                 }
             });
     }
@@ -180,9 +180,9 @@ class TinkermailClient {
     private function getDefaultOptions(): array
     {
         return [
-            'base_uri' => "https://api.tinkermail.io",
+            'base_uri' => "https://api.sendstreak.com",
             'headers' => [
-                'Authorization' => "bearer {$this->apiKey}",
+                'Authorization' => "Bearer {$this->apiKey}",
                 'Content-Type' => "application/json"
             ],
         ];
@@ -192,9 +192,9 @@ class TinkermailClient {
     {
         $response = $exception->getResponse();
         if ($response->getStatusCode() === self::RESPONSE_STATUS_UNAUTHORIZED) {
-            $this->logger->error("Error invoking the tinkermail API. An invalid API key was provided.");
+            $this->logger->error("Error invoking the SendStreak API. An invalid API key was provided.");
         } else {
-            $this->logger->error("Error invoking the tinkermail API. Error message: {$exception->getMessage()}");
+            $this->logger->error("Error invoking the SendStreak API. Error message: {$exception->getMessage()}");
         }
     }
 }
