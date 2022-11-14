@@ -51,4 +51,4 @@ If you're a PHP developer using SendStreak and want to contribute to this SDK, w
 
 ## Hall of fame
 
-13.07.2023 [Daniel Martin Bettenbuk](https://github.com/FractalXX) - Initial version of SendStreak PHP SDK
+13.07.2023 [lonewolf](https://github.com/FractalXX) - Initial version of SendStreak PHP SDK
