@@ -87,6 +87,28 @@ class SendStreakClient {
         $this->options = $options;
     }
 
+    /** 
+     * Sends an event to store for the provided contact.
+     * 
+     * @param string $email The email address of the contact.
+     * @param string $event Name of the event.
+     */
+    public function sendEvent(string $email, string $event): void
+    {
+        $this->invokeSendStreakApi("/v1/events", ['email' => $email, 'slug' => $event]);
+    }
+
+    /** 
+     * Sends an event asynchronously to store for the provided contact.
+     * 
+     * @param string $email The email address of the contact.
+     * @param string $event Name of the event.
+     */
+    public function sendEventAsync(string $email, string $event): PromiseInterface
+    {
+        return $this->invokeSendStreakApiAsync("/v1/events", ['email' => $email, 'slug' => $event]);
+    }
+
     /**
      * Sends a single mail using the template specified by the template slug.
      * 
