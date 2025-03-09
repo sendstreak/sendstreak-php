@@ -1,5 +1,8 @@
 {
     "name": "sendstreak/sendstreak-php",
+    "description": "SendStreak client for PHP",
+    "keywords": ["sendstreak", "api", "client", "email", "smtp", "transactional"],
+    "license": "MIT",
     "type": "library",
     "autoload": {
         "psr-4": {
@@ -8,12 +11,13 @@
     },
     "authors": [
         {
-            "name": "sendstreak.com",
-            "email": "admin@sendstreak.com"
+            "name": "Zoltan Bettenbuk",
+            "email": "zoli@sendstreak.com"
         }
     ],
     "require": {
-        "guzzlehttp/guzzle": "7.0",
-        "psr/log": "~1.0"
-    }
+        "guzzlehttp/guzzle": "~7",
+        "psr/log": "~1"
+    },
+    "version": "1.0.1"
 }
