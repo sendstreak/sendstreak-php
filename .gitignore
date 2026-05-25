@@ -1,1 +1,4 @@
 vendor
+# AI agent files — internal only
+CLAUDE.md
+.claude/
